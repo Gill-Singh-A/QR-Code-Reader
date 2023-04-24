@@ -39,6 +39,9 @@ if __name__ == "__main__":
 			display('-', f"Error while reading {Back.MAGENTA}{data.image}{Back.RESET}")
 		detector = cv2.QRCodeDetector()
 		data_qr, box, qrcode_image = detector.detectAndDecode(image)
+		if not data_qr:
+			inverted_image = cv2.bitwise_not(image)
+			data_qr, box, qrcode_image = detector.detectAndDecode(image)
 		if data_qr:
 			all_data.add(data_qr)
 			display('+', f"Data extracted from QR Code = {Back.MAGENTA}{data_qr}{Back.RESET}")
@@ -63,6 +66,9 @@ if __name__ == "__main__":
 				display('-', "Can't get the Frame from the Camera")
 				break
 			data_qr, box, qrcode_image = detector.detectAndDecode(frame)
+			if not data_qr:
+				inverted_frame = cv2.bitwise_not(frame)
+				data_qr, box, qrcode_image = detector.detectAndDecode(inverted_frame)
 			if data_qr:
 				all_data.add(data_qr)
 				if prev_data != data_qr:
