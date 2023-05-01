@@ -92,7 +92,8 @@ if __name__ == "__main__":
 		cv2.destroyAllWindows()
 	all_data = list(all_data)
 	if not data.save:
-		data.save = f"{date.today()} {get_time()}"
+		current_time = str(strftime("%H_%M_%S", localtime()))
+		data.save = f"{date.today()} {current_time}"
 	if len(all_data) > 0:
 		with open(data.save, 'w') as file:
 			file.write('\n'.join(all_data))
