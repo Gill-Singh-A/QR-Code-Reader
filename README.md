@@ -9,6 +9,7 @@ Modules/Packages used:
 * optparse
 * time
 * colorama
+<!-- -->
 Install the dependencies:
 ```bash
 pip install -r requirements.txt
