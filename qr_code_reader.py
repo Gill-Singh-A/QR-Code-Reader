@@ -93,7 +93,7 @@ if __name__ == "__main__":
 	all_data = list(all_data)
 	if not data.save:
 		current_time = str(strftime("%H_%M_%S", localtime()))
-		data.save = f"{date.today()} {current_time}"
+		data.save = f"{date.today()} {current_time}.txt"
 	if len(all_data) > 0:
 		with open(data.save, 'w') as file:
 			file.write('\n'.join(all_data))
