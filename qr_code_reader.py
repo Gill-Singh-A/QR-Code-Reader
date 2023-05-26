@@ -60,12 +60,15 @@ if __name__ == "__main__":
 		video_capture = cv2.VideoCapture(0)
 		detector = cv2.QRCodeDetector()
 		prev_data = ""
-		while True:
+		while cv2.waitKey(1) != 113:
 			ret, frame = video_capture.read()
 			if not ret:
 				display('-', "Can't get the Frame from the Camera")
 				break
-			data_qr, box, qrcode_image = detector.detectAndDecode(frame)
+			try:
+				data_qr, box, qrcode_image = detector.detectAndDecode(frame)
+			except:
+				continue
 			if not data_qr:
 				inverted_frame = cv2.bitwise_not(frame)
 				data_qr, box, qrcode_image = detector.detectAndDecode(inverted_frame)
@@ -86,8 +89,6 @@ if __name__ == "__main__":
 				except:
 					pass
 			cv2.imshow("Camera", frame)
-			if cv2.waitKey(1) & 0xFF == ord('q'):
-				break
 		video_capture.release()
 		cv2.destroyAllWindows()
 	all_data = list(all_data)
